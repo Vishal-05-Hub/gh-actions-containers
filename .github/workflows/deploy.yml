@@ -11,19 +11,24 @@ jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
-    container:
-      image: node:16
+    #container: If the job is not working inside a container then config will be different.
+      #image: node:16
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb # Fixed protocol name that should be used.
-      MONGODB_CLUSTER_ADDRESS: mongodb # As we running our job in container itself then 
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017
+      # As we running our job in container itself then we have to specify address along with port
       # it is super easy to use configure the service container also and here we are 
       # using the same label name as we are using in the service conatiner to run our tests here.
+      # For running without container 
       MONGODB_USERNAME: root # same credentials as of mongo db service container
       MONGODB_PASSWORD: example
       PORT: 8080
     services:
       mongodb: # It's a label name
         image: mongo # Docker image name for creating mongodb
+        ports:
+          # Transfering of porting from service container to runner machine.
+          - 27017:27017 # 27017 Port for connecting mongodb server
         env:
           # This is for setting the credentials of the temp mongodb used for running 
           # the test and it will go down when tests are runned so no issue to give 
