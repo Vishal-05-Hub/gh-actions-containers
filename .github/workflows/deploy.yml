@@ -28,8 +28,8 @@ jobs:
           # This is for setting the credentials of the temp mongodb used for running 
           # the test and it will go down when tests are runned so no issue to give 
           # credentails here.
-          MONDO_INITDB_ROOT_USERNAME: root
-          MONDO_INITDB_ROOT_PASSWORD: example
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONDGO_INITDB_ROOT_PASSWORD: example
     # Now configuring all these things, now we will be used isolated mongodb service 
     # conatiner instead of usinf=g our own mongodb.
     steps:
